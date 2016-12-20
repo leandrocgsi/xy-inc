@@ -1,4 +1,4 @@
-# xy-inc
+# XY-Inc
 
 [![Build Status](https://travis-ci.org/leandrocgsi/xy-inc.svg?branch=master)](https://travis-ci.org/leandrocgsi/xy-inc)
 [![Build Status](https://circleci.com/gh/leandrocgsi/xy-inc.svg?&style=shield)](https://circleci.com/gh/leandrocgsi/xy-inc/)
