@@ -16,7 +16,6 @@ import br.com.erudio.controller.entities.Model;
 import br.com.erudio.repository.ModelRepository;
 
 @RestController
-@RequestMapping("/model/")
 public class GenericController {
 
     @Autowired
