@@ -23,34 +23,34 @@ public class GenericController {
     private ModelRepository repository;
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{modelId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Model get(@PathVariable(value = "modelId") String modelId) {
+    @RequestMapping(value = "/{modelAlias}/{modelId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Model get(@PathVariable(value = "modelAlias") String modelAlias, @PathVariable(value = "modelId") String modelId) {
         return repository.findOne(modelId);
     }
-
+    
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Model> findAll() {
+    @RequestMapping(value = "/{modelAlias}/findAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Model> findAll(@PathVariable(value = "modelAlias") String modelAlias) {
         return repository.findAll();
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(value = "/{modelAlias}", method = RequestMethod.PUT,
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public Model create(@RequestBody Model model) {
+    public Model create(@PathVariable(value = "modelAlias") String modelAlias, @RequestBody Model model) {
         return repository.save(model);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Model update(@RequestBody Model model) {
+    @RequestMapping(value = "/{modelAlias}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Model update(@PathVariable(value = "modelAlias") String modelAlias, @RequestBody Model model) {
         return repository.insert(model);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{modelId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable(value = "modelId") String modelId) {
+    @RequestMapping(value = "/{modelAlias}/{modelId}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable(value = "modelAlias") String modelAlias, @PathVariable(value = "modelId") String modelId) {
         repository.delete(modelId);
     }
 
