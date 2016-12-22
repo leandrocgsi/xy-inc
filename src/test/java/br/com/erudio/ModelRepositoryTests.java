@@ -24,7 +24,7 @@ public class ModelRepositoryTests {
 
     Model dave, oliver, carter;
 
-    @Before
+    /*@Before
     public void setUp() {
 
         repository.deleteAll();
@@ -58,5 +58,5 @@ public class ModelRepositoryTests {
         List<Model> result = repository.findAll(Example.of(probe));
 
         assertThat(result).hasSize(2).extracting("firstName").contains("Dave", "Oliver August");
-    }
+    }*/
 }
