@@ -1,13 +1,11 @@
 package br.com.erudio.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -39,7 +37,7 @@ public class GenericController {
         return repository.findAll();
     }
 
-    @ResponseStatus(HttpStatus.OK)
+    /*@ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{modelAlias}", method = RequestMethod.PUT,
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +50,7 @@ public class GenericController {
     public HashMap<String, Object> update(@PathVariable(value = "modelAlias") String modelAlias, @RequestBody HashMap<String, Object> model) {
         return genericModelRepository.insert(model);
     }
-
+*/
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{modelAlias}/{modelId}", method = RequestMethod.DELETE)
     public void delete(@PathVariable(value = "modelAlias") String modelAlias, @PathVariable(value = "modelId") String modelId) {
