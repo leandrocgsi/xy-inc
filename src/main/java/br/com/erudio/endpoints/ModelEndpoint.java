@@ -1,9 +1,6 @@
 package br.com.erudio.endpoints;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +26,7 @@ public class ModelEndpoint {
     public ResponseEntity<ResponseWrapper<List<Model>>> getAllRecords() {
         List<Model> models = null;
         try {
-//            models = modelRepository.findAll();
-            models = mockModels();
+            models = modelRepository.findAll();
             if (models==null) {
                 return new ResponseWrapper<List<Model>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();                
             }        
@@ -40,34 +36,6 @@ public class ModelEndpoint {
         }
     }
 
-    private List<Model> mockModels() {
-        List<Model> models;
-        models = new ArrayList<Model>();
-        Model model1 = new Model();
-        Map<String, String> fields1 = new HashMap<String, String>();
-        
-        fields1.put("name", "string");
-        fields1.put("description", "text");
-        fields1.put("price", "decimal");
-        fields1.put("category", "string");
-        model1.setFields(fields1);
-        model1.setName("products");
-        
-        Model model2 = new Model();
-        Map<String, String> fields2 = new HashMap<String, String>();
-        
-        fields2.put("name", "string");
-        fields2.put("artist", "string");
-        fields2.put("gender", "string");
-        fields2.put("year", "integer");
-        model2.setFields(fields2);
-        model2.setName("albums");
-        
-        models.add(model1);
-        models.add(model2);
-        return models;
-    }
-     
     @RequestMapping(method=RequestMethod.GET,value="/models/{key}",produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> getRecord(@PathVariable(value="key") String key) {
         Model model = null;
