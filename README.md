@@ -15,4 +15,4 @@ http://localhost:8080/sdoc.jsp
 
 As you can see Swagger provide a simple way to document US API's.
 
-![Example Page](https://github.com/leandrocgsi/erudio-api-oauth2/blob/master/img/SwaggerDocumentation.png?raw=true)
+![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/swagger_documentation.png?raw=true)
