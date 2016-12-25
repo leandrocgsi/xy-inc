@@ -4,7 +4,14 @@
 [![Build Status](https://circleci.com/gh/leandrocgsi/xy-inc.svg?&style=shield)](https://circleci.com/gh/leandrocgsi/xy-inc/)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?maxAge=2592000)](https://github.com/leandrocgsi/xy-inc/blob/master/LICENSE.txt)
 
-## Technologies used
+## Quickstart
+
+1. Install MongoDB (http://www.mongodb.org/downloads, unzip, run `mkdir data`, run `bin/mongod --dbpath=data`)
+2. Build and run the app (`mvn spring-boot:run`)
+3. Access the root resource (`curl http://localhost:8080/api`) and traverse hyperlinks.
+4. Or access the location search directly (e.g. `http://localhost:8080/api/model`)
+
+# Technologies used
 
 - Spring Boot
 - MongoDB
