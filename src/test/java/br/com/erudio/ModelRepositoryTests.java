@@ -1,4 +1,4 @@
-package br.com.erudio;
+/*package br.com.erudio;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -16,3 +16,4 @@ public class ModelRepositoryTests {
     private RestTemplate restTemplate = new TestRestTemplate();
 
 }
+*/
