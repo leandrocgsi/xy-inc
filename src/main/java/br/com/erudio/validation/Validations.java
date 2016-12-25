@@ -24,13 +24,13 @@ public class Validations {
     @SuppressWarnings("rawtypes")
     public void schema(Map<String, String> schema, Map data) {
         if (schema == null || schema.size() == 0 || data == null    || data.size() == 0) {
-            throw new IllegalArgumentException("schema.empty");
+            throw new IllegalArgumentException("Empty Model");
         }
         
         int dataSize = (data.containsKey("_id"))? data.size()-1 : data.size();
         
         if (dataSize!=schema.size()){
-            throw new IllegalArgumentException("schema.invalid");
+            throw new IllegalArgumentException("Invalid Model");
         }
         
         Class<?> javaType = null;
@@ -43,30 +43,30 @@ public class Validations {
             
             mapType = schema.get((String) field);
             if (mapType == null) {
-                throw new IllegalArgumentException("field.not_exist.schema" + field);
+                throw new IllegalArgumentException("Attribute " + field + " does not exist in model.");
             }
 
             javaType = types.getType(mapType);
             if (javaType == null) {
-                throw new IllegalArgumentException("field.invalid.datatype" + mapType + field);
+                throw new IllegalArgumentException("Invalid datatype to field" + field);
             }
 
             try {
                 Object object = javaType.cast(data.get(field));
                 if (object == null) {
-                    throw new IllegalArgumentException("field.invalid.datatype" + mapType + field);
+                    throw new IllegalArgumentException("Invalid datatype to field" + field);
                 }
             } catch (ClassCastException e) {
-                throw new IllegalArgumentException("field.invalid.datatype" + mapType + field);            }
+                throw new IllegalArgumentException("Invalid datatype to field"  + field);            }
         }
     }
     
     public void checkModelParam(String modelName) throws Exception{
         if (modelName==null || modelName.length()==0){
-            throw new IllegalArgumentException("model.not_set" + modelName);
+            throw new IllegalArgumentException("Please define a Model Name.");
         }
         if (modelRepository.find(modelName)==null){
-            throw new IllegalArgumentException("model.not_exist" + modelName);
+            throw new IllegalArgumentException("Model " + modelName + " was not found.");
         }
     }
     
@@ -74,18 +74,18 @@ public class Validations {
     @SuppressWarnings("rawtypes")
     public void checkNotFound(DBObject dbResult, Map result) throws SQLException{
         if (dbResult==null){
-            throw new SQLException("record.not_found");
+            throw new SQLException("Register not found.");
         }
         
         result = dbResult.toMap(); 
         if (result==null || result.size()==0){
-            throw new SQLException("record.not_found");
+            throw new SQLException("Register not found.");
         }
     }
     
     public void checkCursor(DBCursor cursor) throws SQLException{
         if (cursor==null){
-            throw new SQLException("record.not_found");
+            throw new SQLException("Register not found.");
         }
     }
 }

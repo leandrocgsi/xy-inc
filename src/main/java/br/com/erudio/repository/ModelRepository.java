@@ -68,7 +68,7 @@ public class ModelRepository extends Converter implements Repository<Model>{
             Map map = cursor.next().toMap();
             
             if (map==null || map.size()==0){
-                throw new SQLException("record.not_found");
+                throw new SQLException("Register not found.");
             }
             resultModel = new Model();
             resultModel.setName(map.get("_id").toString());

@@ -29,9 +29,9 @@ public class GenericModelEndpoint {
             genericModelRepository.setModelName(modelName);
             results = genericModelRepository.findAll();
             if (results==null) {
-                return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.NOT_FOUND, "http.status.not_found", null).response();
+                return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }    
-            return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.OK, "http.status.ok", results).response();            
+            return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.OK, "Success!", results).response();            
         } catch (Exception e) {
             return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), results).response();
         }
@@ -45,9 +45,9 @@ public class GenericModelEndpoint {
             genericModelRepository.setModelName(modelName);
             result = (Map<String, Object>) genericModelRepository.find(key);
             if (result==null) {
-                return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "http.status.not_found", null).response();
+                return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }        
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "http.status.ok", result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();
         } catch (Exception e) {
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
         }
@@ -59,7 +59,7 @@ public class GenericModelEndpoint {
         try {        
             genericModelRepository.setModelName(modelName);
             result = genericModelRepository.insert((Map<String, Object>) data);
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.CREATED, "http.status.ok", result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.CREATED, "Success!", result).response();
         } catch (Exception e) {
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
         }
@@ -71,10 +71,10 @@ public class GenericModelEndpoint {
         try {        
             genericModelRepository.setModelName(modelName);
             if (genericModelRepository.find(data.get("_id").toString())==null) {
-                return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "http.status.not_found", null).response();
+                return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }
             result = genericModelRepository.update(data);
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "http.status.ok", result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();
         } catch (Exception e) {
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
         }        
@@ -86,10 +86,10 @@ public class GenericModelEndpoint {
         try {                        
             genericModelRepository.setModelName(modelName);
             if (genericModelRepository.find(key)==null) {
-                return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "http.status.not_found", null).response();
+                return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }
             result = genericModelRepository.delete(key);
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "http.status.ok", result).response();            
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();            
         } catch (Exception e) {
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
         }        
