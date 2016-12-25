@@ -80,10 +80,14 @@ public class ModelRepositoryTests {
         assertNotNull(response);
         Assert.assertEquals(HttpStatus.CREATED, response.getStatus());
         
-        //Insert a repeated model 
-        ResponseWrapper<Model> response2 = restTemplate.postForObject(BASE_PATH, model, ResponseWrapper.class);
-        assertNotNull(response2);
-        Assert.assertEquals(HttpStatus.CONFLICT, response2.getStatus());
+        //Update previously inserted model 
+        model.setName("items");
+        restTemplate.put(BASE_PATH, model);
+        
+        //Check if was updated
+        ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/items", ResponseWrapper.class);
+        assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response2.getResult().toString().contains("items"));
     }
     
     @Test
