@@ -24,7 +24,7 @@ import br.com.erudio.response.ResponseWrapper;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebIntegrationTest
 @SuppressWarnings({ "rawtypes", "deprecation" })
-public class ModelRepositoryTests {
+public class ModelEndpointsTests {
     
     final String BASE_PATH = "http://localhost:8080/api/model";
     private RestTemplate restTemplate;

@@ -60,7 +60,7 @@ public class ModelEndpoint {
         }
     }
     
-    @ApiOperation(value = "Create a new person" )
+    @ApiOperation(value = "Create a new model" )
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> insertRecord(@RequestBody Model model) {        
@@ -77,7 +77,7 @@ public class ModelEndpoint {
         }
     }
 
-    @ApiOperation(value = "Update an existing person")
+    @ApiOperation(value = "Update an existing model")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> updateRecord(@RequestBody Model model){
@@ -94,7 +94,7 @@ public class ModelEndpoint {
         }        
     }
     
-    @ApiOperation(value = "Delete person by ID" )
+    @ApiOperation(value = "Delete model by ID" )
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method=RequestMethod.DELETE,value="/{id}")
     public ResponseEntity<ResponseWrapper<Model>> deleteRecord(@PathVariable(value="id") String id) {        
