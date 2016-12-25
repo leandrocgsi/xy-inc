@@ -34,6 +34,8 @@ public class ModelRepositoryTests {
         restTemplate = new RestTemplate();
     }
     
+    
+    //POST
     @Test
     @SuppressWarnings("unchecked")
     public void testCreateModel() throws JsonProcessingException{
@@ -60,6 +62,32 @@ public class ModelRepositoryTests {
         Assert.assertEquals(HttpStatus.CONFLICT, response2.getStatus());
     }
     
+    //GET by ID
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testFindOne() throws JsonProcessingException{
+        restTemplate.delete(BASE_PATH + "/products");
+        
+        Model model = new Model();
+        Map<String, String> fields = new HashMap<String, String>();
+        
+        fields.put("name", "string");
+        fields.put("description", "text");
+        fields.put("price", "decimal");
+        fields.put("category", "string");
+        model.setFields(fields);
+        model.setName("products");
+        
+        //Insert a new model 
+        ResponseWrapper<Model> response = restTemplate.postForObject(BASE_PATH, model, ResponseWrapper.class);
+        
+        //Check if was updated
+        ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/products", ResponseWrapper.class);
+        assertNotNull(response);
+        Assert.assertTrue(response2.getResult().toString().contains("products"));
+    }
+    
+    //PUT
     @Test
     @SuppressWarnings("unchecked")
     public void testUpdateModel() throws JsonProcessingException{
@@ -81,15 +109,17 @@ public class ModelRepositoryTests {
         Assert.assertEquals(HttpStatus.CREATED, response.getStatus());
         
         //Update previously inserted model 
-        model.setName("items");
+        fields.put("manufacturer", "string");
+        model.setFields(fields);
         restTemplate.put(BASE_PATH, model);
         
         //Check if was updated
-        /*ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/items", ResponseWrapper.class);
+        ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/products", ResponseWrapper.class);
         assertNotNull(response);
-        Assert.assertEquals(HttpStatus.OK, response2.getResult().toString().contains("items"));*/
+        Assert.assertTrue(response2.getResult().toString().contains("manufacturer"));
     }
     
+    //GET all
     @Test
     public void testFindAll() throws JsonProcessingException{
         ResponseWrapper response = restTemplate.getForObject(BASE_PATH, ResponseWrapper.class);
