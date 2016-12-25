@@ -17,12 +17,13 @@ import br.com.erudio.repository.ModelRepository;
 import br.com.erudio.response.ResponseWrapper;
 
 @RestController
+@RequestMapping("/model")
 public class ModelEndpoint {
 
     @Autowired
     private ModelRepository modelRepository;
     
-    @RequestMapping(method=RequestMethod.GET,value="/models",produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<List<Model>>> getAllRecords() {
         List<Model> models = null;
         try {
@@ -36,11 +37,11 @@ public class ModelEndpoint {
         }
     }
 
-    @RequestMapping(method=RequestMethod.GET,value="/models/{key}",produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseWrapper<Model>> getRecord(@PathVariable(value="key") String key) {
+    @RequestMapping(method=RequestMethod.GET,value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseWrapper<Model>> getRecord(@PathVariable(value="id") String id) {
         Model model = null;
         try {
-            model = modelRepository.find(key);
+            model = modelRepository.find(id);
             if (model==null) {
                 return new ResponseWrapper<Model>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }    
@@ -50,7 +51,7 @@ public class ModelEndpoint {
         }
     }
     
-    @RequestMapping(method=RequestMethod.POST,value="/models",produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> insertRecord(@RequestBody Model model) {        
         Model result;
         try {                        
@@ -65,7 +66,7 @@ public class ModelEndpoint {
         }
     }
 
-    @RequestMapping(method=RequestMethod.PUT,value="/models",consumes=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> updateRecord(@RequestBody Model model){
         Model result = null;
         try {
@@ -80,14 +81,14 @@ public class ModelEndpoint {
         }        
     }
     
-    @RequestMapping(method=RequestMethod.DELETE,value="/models/{key}")
-    public ResponseEntity<ResponseWrapper<Model>> deleteRecord(@PathVariable(value="key") String key) {        
+    @RequestMapping(method=RequestMethod.DELETE,value="/{id}")
+    public ResponseEntity<ResponseWrapper<Model>> deleteRecord(@PathVariable(value="id") String id) {        
         Model result = null;
         try {            
-            if (modelRepository.find(key)==null) {
+            if (modelRepository.find(id)==null) {
                 return new ResponseWrapper<Model>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }
-            result = modelRepository.delete(key);
+            result = modelRepository.delete(id);
             return new ResponseWrapper<Model>(HttpStatus.OK, "Success!", result).response();    
     
         } catch (Exception e) {
