@@ -1,70 +1,60 @@
 package br.com.erudio;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.awt.print.Book;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.erudio.controller.entities.Model;
+import br.com.erudio.response.ResponseWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebIntegrationTest
 public class ModelRepositoryTests {
     
-    private RestTemplate restTemplate = new TestRestTemplate();
-    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    public final String basePath = "http://localhost:8080/api";
+    final String BASE_PATH = "http://localhost:8080/api/model";
+    
+    @Before
+    public void setUp() throws Exception {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseWrapper response = restTemplate.getForObject(BASE_PATH, ResponseWrapper.class);
+
+        restTemplate.delete(BASE_PATH + "/products");
+    }
     
     @Test
     public void testCreateModel() throws JsonProcessingException{
+        RestTemplate restTemplate = new RestTemplate();
       
-      Map<String, Object> requestBody = new HashMap<String, Object>();
-      requestBody.put("name", "Book 1");
-      requestBody.put("isbn", "QWER1234");
-      requestBody.put("author", "Author 1");
-      requestBody.put("pages", 200);
-      HttpHeaders requestHeaders = new HttpHeaders();
-      requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+        Model model = new Model();
+        Map<String, String> fields = new HashMap<String, String>();
+        
+        fields.put("name", "string");
+        fields.put("description", "text");
+        fields.put("price", "decimal");
+        fields.put("category", "string");
+        model.setFields(fields);
+        model.setName("products");
+      
+      ResponseEntity<ResponseWrapper<Model>> response = restTemplate.postForEntity(BASE_PATH, model, ResponseWrapper.class, Collections.EMPTY_MAP);
 
-      HttpEntity<String> httpEntity =  new HttpEntity<String>(OBJECT_MAPPER.writeValueAsString(requestBody), requestHeaders);
-    Map<String, Object> apiResponse =  restTemplate.postForObject(string, httpEntity, Map.class, Collections.EMPTY_MAP);
-
-      assertNotNull(apiResponse);
-      
-      //Asserting the response of the API.
-      String message = apiResponse.get("message").toString();
-      assertEquals("Book created successfully", message);
-      String bookId = ((Map<String, Object>)apiResponse.get("book")).get("id").toString();
-      
-      assertNotNull(bookId);
-      
-      //Fetching the Book details directly from the DB to verify the API succeeded
-      Book bookFromDb = bookRepository.findOne(bookId);
-      assertEquals("Book 1", bookFromDb.getName());
-      assertEquals("QWER1234", bookFromDb.getIsbn());
-      assertEquals("Author 1", bookFromDb.getAuthor());
-      assertTrue(200 == bookFromDb.getPages());
-      
-      //Delete the data added for testing
-      bookRepository.delete(bookId);
-
+      assertNotNull(response);
     }
 
 }
