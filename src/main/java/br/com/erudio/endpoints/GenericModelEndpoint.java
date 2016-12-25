@@ -22,7 +22,7 @@ public class GenericModelEndpoint {
     @Autowired
     private GenericModelRepository genericModelRepository;
     
-    @RequestMapping(method=RequestMethod.GET,value="/model/{modelName}",produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method=RequestMethod.GET,value="/{modelName}",produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<List<Map<String, Object>>>> getAllRecords(@PathVariable(value="modelName") String modelName) {
         List<Map<String, Object>> results = null;
         try {
@@ -37,13 +37,13 @@ public class GenericModelEndpoint {
         }
     }
      
-    @RequestMapping(method=RequestMethod.GET,value="/model/{modelName}/{key}",produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseWrapper<Map<String, Object>>> getRecord(@PathVariable(value="modelName") String modelName, @PathVariable(value="key") String key) {
+    @RequestMapping(method=RequestMethod.GET,value="/{modelName}/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseWrapper<Map<String, Object>>> getRecord(@PathVariable(value="modelName") String modelName, @PathVariable(value="id") String id) {
         Map<String, Object> result = null;
         try {
     
             genericModelRepository.setModelName(modelName);
-            result = (Map<String, Object>) genericModelRepository.find(key);
+            result = (Map<String, Object>) genericModelRepository.find(id);
             if (result==null) {
                 return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }        
@@ -53,7 +53,7 @@ public class GenericModelEndpoint {
         }
     }
     
-    @RequestMapping(method=RequestMethod.POST,value="/model/{modelName}",consumes=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method=RequestMethod.POST,value="/{modelName}",consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Map<String, Object>>> insertRecord(@PathVariable(value="modelName") String modelName, @RequestBody Map<String, Object> data) {        
         Map<String, Object> result = null;
         try {        
@@ -65,7 +65,7 @@ public class GenericModelEndpoint {
         }
     }
 
-    @RequestMapping(method=RequestMethod.PUT,value="/model/{modelName}",consumes=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method=RequestMethod.PUT,value="/{modelName}",consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Map<String, Object>>> updateRecord(@PathVariable(value="modelName") String modelName, @RequestBody Map<String, Object> data){
         Map<String, Object> result = null;
         try {        
@@ -80,15 +80,15 @@ public class GenericModelEndpoint {
         }        
     }
     
-    @RequestMapping(method=RequestMethod.DELETE,value="/model/{modelName}/{key}")
-    public ResponseEntity<ResponseWrapper<Map<String, Object>>> deleteRecord(@PathVariable(value="modelName") String modelName, @PathVariable(value="key") String key) {        
+    @RequestMapping(method=RequestMethod.DELETE,value="/{modelName}/{id}")
+    public ResponseEntity<ResponseWrapper<Map<String, Object>>> deleteRecord(@PathVariable(value="modelName") String modelName, @PathVariable(value="id") String id) {        
         Map<String, Object> result = null;
         try {                        
             genericModelRepository.setModelName(modelName);
-            if (genericModelRepository.find(key)==null) {
+            if (genericModelRepository.find(id)==null) {
                 return new ResponseWrapper<Map<String, Object>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }
-            result = genericModelRepository.delete(key);
+            result = genericModelRepository.delete(id);
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();            
         } catch (Exception e) {
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
