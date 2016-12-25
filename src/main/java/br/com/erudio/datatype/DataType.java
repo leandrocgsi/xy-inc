@@ -1,4 +1,4 @@
-package br.com.erudio.models.datatype;
+package br.com.erudio.datatype;
 
 import java.util.Date;
 import java.util.HashMap;

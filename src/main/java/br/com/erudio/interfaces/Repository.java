@@ -1,4 +1,4 @@
-package br.com.erudio.repository.interfaces;
+package br.com.erudio.interfaces;
 
 import java.util.List;
 
