@@ -12,24 +12,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wordnik.swagger.annotations.ApiOperation;
+
 import br.com.erudio.controller.entities.Model;
 import br.com.erudio.repository.ModelRepository;
 import br.com.erudio.response.ResponseWrapper;
 
 @RestController
-@RequestMapping("/model")
+@RequestMapping("/api/model")
 public class ModelEndpoint {
 
     @Autowired
     private ModelRepository modelRepository;
     
+    @ApiOperation(value = "Find all models." )
     @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<List<Model>>> getAllRecords() {
         List<Model> models = null;
         try {
             models = modelRepository.findAll();
             if (models==null) {
-                return new ResponseWrapper<List<Model>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();                
+                return new ResponseWrapper<List<Model>>(HttpStatus.NOT_FOUND, "Register not found.", null).response();
             }        
             return new ResponseWrapper<List<Model>>(HttpStatus.OK, "Success!", models).response();    
         } catch (Exception e) {
@@ -37,6 +40,7 @@ public class ModelEndpoint {
         }
     }
 
+    @ApiOperation(value = "Find a model by ID" )
     @RequestMapping(method=RequestMethod.GET,value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> getRecord(@PathVariable(value="id") String id) {
         Model model = null;
@@ -51,6 +55,7 @@ public class ModelEndpoint {
         }
     }
     
+    @ApiOperation(value = "Create a new person" )
     @RequestMapping(method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> insertRecord(@RequestBody Model model) {        
         Model result;
@@ -66,6 +71,7 @@ public class ModelEndpoint {
         }
     }
 
+    @ApiOperation(value = "Update an existing person")
     @RequestMapping(method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseWrapper<Model>> updateRecord(@RequestBody Model model){
         Model result = null;
@@ -81,6 +87,7 @@ public class ModelEndpoint {
         }        
     }
     
+    @ApiOperation(value = "Delete person by ID" )
     @RequestMapping(method=RequestMethod.DELETE,value="/{id}")
     public ResponseEntity<ResponseWrapper<Model>> deleteRecord(@PathVariable(value="id") String id) {        
         Model result = null;

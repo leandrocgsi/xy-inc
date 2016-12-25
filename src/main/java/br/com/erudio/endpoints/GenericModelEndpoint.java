@@ -17,6 +17,7 @@ import br.com.erudio.repository.GenericModelRepository;
 import br.com.erudio.response.ResponseWrapper;
 
 @RestController
+@RequestMapping("/api")
 public class GenericModelEndpoint {
 
     @Autowired
