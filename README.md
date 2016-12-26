@@ -25,6 +25,7 @@
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_04.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_05.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_06.png?raw=true)
+![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_07.png?raw=true)
 
 # Swagger API documentation 
 
