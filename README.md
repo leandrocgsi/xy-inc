@@ -20,7 +20,7 @@
 # Using services
 
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
-![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
+![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_02.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
