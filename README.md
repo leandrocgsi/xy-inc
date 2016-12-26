@@ -7,8 +7,8 @@
 # Quickstart
 
 1. Install MongoDB (http://www.mongodb.org/downloads, unzip, run `mkdir data`, run `bin/mongod --dbpath=data`)
-2. Build and run the app (`mvn spring-boot:run`)
-3. Access the root resource (`curl http://localhost:8080/api`) and traverse hyperlinks.
+2. Build and run the app `mvn spring-boot:run`
+3. Access the root resource `curl http://localhost:8080/api` and traverse hyperlinks.
 4. Or access the location search directly `http://localhost:8080/api/model`.
 5. Additionally Swagger gives you possibility you test your endpoints in your interface, that can be accessed by `http://localhost:8080/sdoc.jsp`.
 
