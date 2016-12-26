@@ -19,6 +19,7 @@
 - Circle CI
 - Travis CI
 - Embeded Tomcat
+- JUnit
 
 # Using services
 
