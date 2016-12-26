@@ -39,7 +39,7 @@
 
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_05.png?raw=true)
 
-* Updating an item from a model
+* Show all items from a model
 
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_06.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_07.png?raw=true)
