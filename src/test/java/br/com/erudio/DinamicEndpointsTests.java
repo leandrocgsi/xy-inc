@@ -26,12 +26,29 @@ import br.com.erudio.response.ResponseWrapper;
 @SuppressWarnings({ "rawtypes", "deprecation" })
 public class DinamicEndpointsTests {
     
-    final String BASE_PATH = "http://localhost:8080/api/model";
+    final String BASE_PATH = "http://localhost:8080/api";
+    final String BASE_PATH_MODEL = "http://localhost:8080/api/model";
+    
     private RestTemplate restTemplate;
     
     @Before
     public void setUp() throws Exception {
         restTemplate = new RestTemplate();
+        
+        restTemplate.delete(BASE_PATH_MODEL + "/albums");
+        
+        Model model = new Model();
+        Map<String, String> fields = new HashMap<String, String>();
+        
+        fields.put("gender", "string");
+        fields.put("year", "integer");
+        fields.put("artist", "string");
+        fields.put("name", "string");
+        model.setFields(fields);
+        model.setName("albums");
+        
+        //Insert a new model 
+        ResponseWrapper<Model> response = restTemplate.postForObject(BASE_PATH_MODEL, model, ResponseWrapper.class);
     }
     
     
@@ -39,90 +56,58 @@ public class DinamicEndpointsTests {
     @Test
     @SuppressWarnings("unchecked")
     public void testCreateModel() throws JsonProcessingException{
-        restTemplate.delete(BASE_PATH + "/products");
+        Map<String, Object> fields = new HashMap<String, Object>();
+        
+        fields.put("gender", "Hard Rock");
+        fields.put("year", 1976);
+        fields.put("artist", "Nazareth");
+        fields.put("name", "Close Enough for Rock 'n' Roll");
 
-        Model model = new Model();
-        Map<String, String> fields = new HashMap<String, String>();
-
-        fields.put("name", "string");
-        fields.put("description", "text");
-        fields.put("price", "decimal");
-        fields.put("category", "string");
-        model.setFields(fields);
-        model.setName("products");
-
-        //Insert a new model 
-        ResponseWrapper<Model> response = restTemplate.postForObject(BASE_PATH, model, ResponseWrapper.class);
+        ResponseWrapper<Map<String, Object>> response = restTemplate.postForObject(BASE_PATH + "/albums", fields, ResponseWrapper.class);
         assertNotNull(response);
         Assert.assertEquals(HttpStatus.CREATED, response.getStatus());
-        
-        //Insert a repeated model 
-        ResponseWrapper<Model> response2 = restTemplate.postForObject(BASE_PATH, model, ResponseWrapper.class);
-        assertNotNull(response2);
-        Assert.assertEquals(HttpStatus.CONFLICT, response2.getStatus());
     }
     
     //GET by ID
     @Test
     @SuppressWarnings("unchecked")
     public void testFindOne() throws JsonProcessingException{
-        restTemplate.delete(BASE_PATH + "/products");
+        Map<String, Object> fields = new HashMap<String, Object>();
         
-        Model model = new Model();
-        Map<String, String> fields = new HashMap<String, String>();
+        fields.put("gender", "Progressive Rock");
+        fields.put("year", 1971);
+        fields.put("artist", "Jethro Tull");
+        fields.put("name", "Aqualung");
+
+        ResponseWrapper<Map<String, Object>> response = restTemplate.postForObject(BASE_PATH + "/albums", fields, ResponseWrapper.class);
         
-        fields.put("name", "string");
-        fields.put("description", "text");
-        fields.put("price", "decimal");
-        fields.put("category", "string");
-        model.setFields(fields);
-        model.setName("products");
-        
-        //Insert a new model 
-        ResponseWrapper<Model> response = restTemplate.postForObject(BASE_PATH, model, ResponseWrapper.class);
-        
-        //Check if was updated
-        ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/products", ResponseWrapper.class);
+        Map result = (Map) response.getResult();
+        String id = (String) result.get("_id");
+
+        ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/albums/" + id , ResponseWrapper.class);
         assertNotNull(response);
-        Assert.assertTrue(response2.getResult().toString().contains("products"));
+        Assert.assertTrue(response2.getResult().toString().contains("gender=Progressive Rock, year=1971, artist=Jethro Tull, name=Aqualung"));
     }
     
     //PUT
     @Test
     @SuppressWarnings("unchecked")
-    public void testUpdateModel() throws JsonProcessingException{
-        restTemplate.delete(BASE_PATH + "/products");
+    public void testCreateUnsuportedModel() throws JsonProcessingException{
+        Map<String, Object> fields = new HashMap<String, Object>();
         
-        Model model = new Model();
-        Map<String, String> fields = new HashMap<String, String>();
-        
-        fields.put("name", "string");
-        fields.put("description", "text");
-        fields.put("price", "decimal");
-        fields.put("category", "string");
-        model.setFields(fields);
-        model.setName("products");
-        
-        //Insert a new model 
-        ResponseWrapper<Model> response = restTemplate.postForObject(BASE_PATH, model, ResponseWrapper.class);
+        fields.put("manufacturer", "SAMSUNG");
+        fields.put("details", "Explosive");
+        fields.put("model", "Galaxy Note 7 ");
+
+        ResponseWrapper<Map<String, Object>> response = restTemplate.postForObject(BASE_PATH + "/telephones", fields, ResponseWrapper.class);
         assertNotNull(response);
-        Assert.assertEquals(HttpStatus.CREATED, response.getStatus());
-        
-        //Update previously inserted model 
-        fields.put("manufacturer", "string");
-        model.setFields(fields);
-        restTemplate.put(BASE_PATH, model);
-        
-        //Check if was updated
-        ResponseWrapper response2 = restTemplate.getForObject(BASE_PATH + "/products", ResponseWrapper.class);
-        assertNotNull(response);
-        Assert.assertTrue(response2.getResult().toString().contains("manufacturer"));
+        Assert.assertEquals(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, response.getStatus());
     }
     
     //GET all
     @Test
     public void testFindAll() throws JsonProcessingException{
-        ResponseWrapper response = restTemplate.getForObject(BASE_PATH, ResponseWrapper.class);
+        ResponseWrapper response = restTemplate.getForObject(BASE_PATH + "/albums", ResponseWrapper.class);
         assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatus());
     }

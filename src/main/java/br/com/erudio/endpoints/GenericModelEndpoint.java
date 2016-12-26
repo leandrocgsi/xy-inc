@@ -41,7 +41,7 @@ public class GenericModelEndpoint {
             }    
             return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.OK, "Success!", results).response();            
         } catch (Exception e) {
-            return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), results).response();
+            return new ResponseWrapper<List<Map<String, Object>>>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), results).response();
         }
     }
      
@@ -59,7 +59,7 @@ public class GenericModelEndpoint {
             }        
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();
         } catch (Exception e) {
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), result).response();
         }
     }
     
@@ -73,7 +73,7 @@ public class GenericModelEndpoint {
             result = genericModelRepository.insert((Map<String, Object>) data);
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.CREATED, "Success!", result).response();
         } catch (Exception e) {
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), result).response();
         }
     }
 
@@ -90,7 +90,7 @@ public class GenericModelEndpoint {
             result = genericModelRepository.update(data);
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();
         } catch (Exception e) {
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), result).response();
         }        
     }
     
@@ -107,7 +107,7 @@ public class GenericModelEndpoint {
             result = genericModelRepository.delete(id);
             return new ResponseWrapper<Map<String, Object>>(HttpStatus.OK, "Success!", result).response();            
         } catch (Exception e) {
-            return new ResponseWrapper<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
+            return new ResponseWrapper<Map<String, Object>>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), result).response();
         }        
     }
     

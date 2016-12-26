@@ -40,7 +40,7 @@ public class ModelEndpoint {
             }        
             return new ResponseWrapper<List<Model>>(HttpStatus.OK, "Success!", models).response();    
         } catch (Exception e) {
-            return new ResponseWrapper<List<Model>>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), models).response();            
+            return new ResponseWrapper<List<Model>>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), models).response();            
         }
     }
 
@@ -56,7 +56,7 @@ public class ModelEndpoint {
             }    
             return new ResponseWrapper<Model>(HttpStatus.OK, "Success!", model).response();                
         } catch (Exception e) {
-            return new ResponseWrapper<Model>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), model).response();
+            return new ResponseWrapper<Model>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), model).response();
         }
     }
     
@@ -73,7 +73,7 @@ public class ModelEndpoint {
             return new ResponseWrapper<Model>(HttpStatus.CREATED, "Success!", result).response();    
     
         } catch (Exception e) {
-            return new ResponseWrapper<Model>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), model).response();
+            return new ResponseWrapper<Model>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), model).response();
         }
     }
 
@@ -90,7 +90,7 @@ public class ModelEndpoint {
             return new ResponseWrapper<Model>(HttpStatus.OK, "Success!", result).response();
     
         } catch (Exception e) {
-            return new ResponseWrapper<Model>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), model).response();
+            return new ResponseWrapper<Model>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), model).response();
         }        
     }
     
@@ -107,7 +107,7 @@ public class ModelEndpoint {
             return new ResponseWrapper<Model>(HttpStatus.OK, "Success!", result).response();    
     
         } catch (Exception e) {
-            return new ResponseWrapper<Model>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), result).response();
+            return new ResponseWrapper<Model>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, e.getMessage(), result).response();
         }        
     }
 }
