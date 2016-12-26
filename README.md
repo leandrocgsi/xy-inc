@@ -22,7 +22,7 @@
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_02.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_03.png?raw=true)
-![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
+![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_04.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
 ![Example Page](https://github.com/leandrocgsi/xy-inc/blob/master/img/img_01.png?raw=true)
 
