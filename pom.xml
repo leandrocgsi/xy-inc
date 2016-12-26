@@ -36,7 +36,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
          
-        <!-- Adicione as dependências do Swagger API necessárias para gerar a documentação da aplicação-->
         <dependency>
             <groupId>com.mangofactory</groupId>
             <artifactId>swagger-springmvc</artifactId>
