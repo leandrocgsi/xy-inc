@@ -16,6 +16,7 @@
 - Spring Boot
 - MongoDB
 - Swagger
+- Circle CI
 
 # Using services
 
