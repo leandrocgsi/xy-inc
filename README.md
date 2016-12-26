@@ -18,6 +18,7 @@
 - Swagger
 - Circle CI
 - Travis CI
+- Embeded Tomcat
 
 # Using services
 
