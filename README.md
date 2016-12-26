@@ -17,6 +17,7 @@
 - MongoDB
 - Swagger
 - Circle CI
+- Travis CI
 
 # Using services
 
