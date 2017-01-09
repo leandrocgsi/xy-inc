@@ -24,7 +24,7 @@
 
 # Using services
 
-Using a tool such as Postman or SOAP-UI we can perform the following operations:
+Using a tool such as Postman or SOAP-UI we can perform the following test operations:
 
 * Creating a new model
 
